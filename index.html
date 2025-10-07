@@ -1091,6 +1091,140 @@
         .visible .bar {
             height: var(--height) !important;
         }
+        /* Desktop recommendation overlay styles */
+        .desktop-overlay-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(2,6,23,0.75);
+            backdrop-filter: blur(6px) saturate(1.05);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+        }
+
+        .desktop-overlay-backdrop.active {
+            display: flex;
+        }
+
+        .desktop-overlay {
+            width: min(760px, 96%);
+            background: linear-gradient(180deg, rgba(11,12,16,0.98), rgba(25,28,34,0.98));
+            color: #E6F8F7;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            padding: 28px;
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 20px;
+            align-items: start;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .desktop-overlay h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            color: #66FCF1;
+            margin-bottom: 12px;
+        }
+
+        .desktop-overlay p.lead {
+            color: #C5C6C7;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .desktop-cta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .desktop-btn {
+            background: #66FCF1;
+            color: #0B0C10;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(102,252,241,0.18);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .desktop-btn.secondary {
+            background: transparent;
+            color: #E6F8F7;
+            border: 1px solid rgba(230,248,247,0.12);
+        }
+
+        .desktop-btn:hover { transform: translateY(-3px); }
+
+        .desktop-instructions {
+            font-size: 13px;
+            color: #C5C6C7;
+            background: rgba(255,255,255,0.02);
+            padding: 12px;
+            border-radius: 8px;
+            line-height: 1.4;
+        }
+
+        .desktop-side {
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border-radius: 10px;
+            padding: 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .desktop-side .tip {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .desktop-side .tip .icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 8px;
+            background: rgba(102,252,241,0.08);
+            display: grid;
+            place-items: center;
+            color: #66FCF1;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .desktop-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .desktop-small {
+            font-size: 13px;
+            color: #99BFC0;
+        }
+
+        .desktop-checkbox {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            color: #C5C6C7;
+            font-size: 14px;
+        }
+
+        @media (max-width: 720px) {
+            .desktop-overlay { grid-template-columns: 1fr; }
+            .desktop-cta { flex-direction: column; align-items: stretch; }
+            .desktop-side { order: 2; }
+        }
     </style>
 </head>
 <body>
@@ -1495,6 +1629,64 @@
         <p>Enable Desktop Site for Best Experience</p>
     </div>
 
+    <!-- Desktop recommendation overlay -->
+    <div class="desktop-overlay-backdrop" id="desktopOverlay" role="dialog" aria-modal="true" aria-labelledby="desktopTitle">
+        <div class="desktop-overlay" tabindex="-1">
+            <div>
+                <h3 id="desktopTitle">For the best experience, switch to Desktop View</h3>
+                <p class="lead">This site is designed for desktop screens. For full layout, animations, and portfolio visuals, enable "Desktop Site" in your mobile browser.</p>
+
+                <div class="desktop-instructions" id="desktopInstructions">
+                    <strong style="color:#FFFFFF">Quick steps</strong>
+                    <ol style="margin-top:8px; margin-left:18px; color:#C5C6C7;">
+                        <li>Open your browser menu (three dots or share icon).</li>
+                        <li>Choose <em>Desktop site</em> or <em>Request desktop site</em>.</li>
+                        <li>Reload this page if needed.</li>
+                    </ol>
+                </div>
+
+                <div class="desktop-cta">
+                    <button class="desktop-btn" id="enableDesktopBtn">Enable Desktop Site</button>
+                    <button class="desktop-btn secondary" id="learnMoreBtn">How to enable</button>
+                </div>
+
+                <div class="desktop-footer">
+                    <div class="desktop-checkbox">
+                        <input type="checkbox" id="dontShowCheckbox" aria-label="Don't show again">
+                        <label for="dontShowCheckbox">Don't show this again on this device</label>
+                    </div>
+                    <div class="desktop-small">Detected: <span id="detectedDevice">Mobile</span></div>
+                </div>
+            </div>
+
+            <aside class="desktop-side" aria-hidden="false">
+                <div class="tip">
+                    <div class="icon">💡</div>
+                    <div>
+                        <strong>Why this helps</strong>
+                        <p class="desktop-small">Desktop view preserves the original layout, galleries, and interactive elements we built for larger screens.</p>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <div class="icon">🛠️</div>
+                    <div>
+                        <strong>If the button doesn't work</strong>
+                        <p class="desktop-small">Different browsers expose the setting in different places. Tap the menu (⋮ or ⇪) and look for <em>Request desktop site</em> or <em>Desktop site</em>.</p>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <div class="icon">🔒</div>
+                    <div>
+                        <strong>Privacy</strong>
+                        <p class="desktop-small">We only store your 'don't show again' preference locally on your device.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
     <script>
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('nav a');
@@ -1590,6 +1782,102 @@
         if (window.innerWidth < 768) {
             // document.getElementById('mobile-overlay').style.display = 'flex'; // Comment out if not needed
         }
+        // Desktop recommendation overlay logic
+        (function() {
+            const overlay = document.getElementById('desktopOverlay');
+            const enableBtn = document.getElementById('enableDesktopBtn');
+            const learnMoreBtn = document.getElementById('learnMoreBtn');
+            const dontShow = document.getElementById('dontShowCheckbox');
+            const detected = document.getElementById('detectedDevice');
+
+            function isMobile() {
+                // Basic mobile detection
+                return /Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent) || window.innerWidth < 768;
+            }
+
+            function getBrowserName() {
+                const ua = navigator.userAgent;
+                if (/Chrome/i.test(ua) && !/Edge|OPR/i.test(ua)) return 'Chrome';
+                if (/Safari/i.test(ua) && !/Chrome/i.test(ua)) return 'Safari';
+                if (/Firefox/i.test(ua)) return 'Firefox';
+                if (/OPR|Opera/i.test(ua)) return 'Opera';
+                if (/Edg/i.test(ua)) return 'Edge';
+                return 'Browser';
+            }
+
+            function showOverlay() {
+                overlay.classList.add('active');
+                // trap focus to overlay for accessibility
+                const focusable = overlay.querySelector('button, [href], input, textarea, select');
+                if (focusable) focusable.focus();
+            }
+
+            function hideOverlay() {
+                overlay.classList.remove('active');
+            }
+
+            // Don't show if user opted out
+            try {
+                const dismissed = localStorage.getItem('desktop_overlay_dismissed');
+                if (dismissed === '1') return;
+            } catch (e) { /* ignore */ }
+
+            if (isMobile()) {
+                detected.textContent = getBrowserName();
+                // show after a short delay so it feels natural
+                setTimeout(showOverlay, 600);
+            }
+
+            // 'Enable Desktop Site' can't be set programmatically in browsers for security reasons.
+            // We'll open a small helper overlay that highlights steps and copies a quick tip to clipboard.
+            enableBtn.addEventListener('click', async () => {
+                // Try to copy short instruction to clipboard
+                const text = 'Open browser menu and choose "Desktop site" or "Request desktop site" then reload the page.';
+                try { await navigator.clipboard.writeText(text); }
+                catch (e) { /* clipboard may be unavailable */ }
+
+                // Show a lightweight confirmation
+                enableBtn.textContent = 'Copied steps — Open menu';
+                enableBtn.disabled = true;
+                setTimeout(() => {
+                    enableBtn.textContent = 'Enable Desktop Site';
+                    enableBtn.disabled = false;
+                }, 2500);
+            });
+
+            learnMoreBtn.addEventListener('click', () => {
+                // Replace instructions with browser-specific hints
+                const name = getBrowserName();
+                const inst = document.getElementById('desktopInstructions');
+                let html = '';
+                if (name === 'Chrome' || name === 'Edge' || name === 'Opera') {
+                    html = '<strong>Chrome / Edge / Opera</strong><ol style="margin-top:8px;margin-left:18px;color:#C5C6C7;"><li>Tap the three-dot menu (⋮)</li><li>Check "Desktop site" or "Request desktop site"</li><li>Reload this page</li></ol>';
+                } else if (name === 'Safari') {
+                    html = '<strong>Safari (iOS)</strong><ol style="margin-top:8px;margin-left:18px;color:#C5C6C7;"><li>Tap the "aA" icon in the address bar</li><li>Select "Request Desktop Website"</li><li>Reload the page</li></ol>';
+                } else if (name === 'Firefox') {
+                    html = '<strong>Firefox</strong><ol style="margin-top:8px;margin-left:18px;color:#C5C6C7;"><li>Open the menu (⋮)</li><li>Choose "Desktop site"</li><li>Reload the page</li></ol>';
+                } else {
+                    html = '<strong>Other</strong><p style="color:#C5C6C7;">Open your browser menu and look for an option named "Desktop site" or "Request desktop site".</p>';
+                }
+                inst.innerHTML = html;
+            });
+
+            // Persist don't-show-again
+            dontShow.addEventListener('change', () => {
+                try {
+                    if (dontShow.checked) localStorage.setItem('desktop_overlay_dismissed', '1');
+                    else localStorage.removeItem('desktop_overlay_dismissed');
+                } catch (e) { /* ignore */ }
+            });
+
+            // allow dismiss by clicking outside overlay content
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) hideOverlay();
+            });
+
+            // close overlay when user navigates to other sections from menu
+            document.querySelectorAll('nav a').forEach(a => a.addEventListener('click', hideOverlay));
+        })();
     </script>
 </body>
 </html>
