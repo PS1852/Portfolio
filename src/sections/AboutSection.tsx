@@ -102,7 +102,7 @@ export default function AboutSection() {
             Services That <span className="gradient-text">Deliver Results</span>
           </h2>
           <p className="body-text text-white/60 max-w-2xl mx-auto">
-            From concept to launch, I provide end-to-end digital solutions that help 
+            From concept to launch, I provide end-to-end digital solutions that help
             businesses grow and succeed in the digital landscape.
           </p>
         </div>
@@ -132,13 +132,13 @@ export default function AboutSection() {
         <div className="mt-20 relative">
           <div className="rounded-3xl overflow-hidden border border-white/10">
             <img
-              src="/images/about_design.jpg"
+              src="./images/about_design.jpg"
               alt="Design Process"
               className="w-full h-auto"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-[#1a0a2e]/90 via-transparent to-[#1a0a2e]/90" />
           </div>
-          
+
           {/* Overlay Content */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center px-4">
@@ -146,7 +146,7 @@ export default function AboutSection() {
                 Let's Create Something <span className="gradient-text">Amazing</span>
               </h3>
               <p className="text-white/70 max-w-lg mx-auto mb-6">
-                Every project is an opportunity to push boundaries and create 
+                Every project is an opportunity to push boundaries and create
                 something truly unique. Ready to start your journey?
               </p>
               <button

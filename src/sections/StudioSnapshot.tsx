@@ -119,7 +119,7 @@ export default function StudioSnapshot({ className = '' }: StudioSnapshotProps) 
         }}
       >
         <img
-          src="/images/snapshot_stairs.jpg"
+          src="./images/snapshot_stairs.jpg"
           alt="Architectural stairwell"
           className="w-full h-full object-cover img-cinematic"
         />

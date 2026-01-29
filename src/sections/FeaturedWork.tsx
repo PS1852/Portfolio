@@ -131,7 +131,7 @@ export default function FeaturedWork({ className = '' }: FeaturedWorkProps) {
         }}
       >
         <img
-          src="/images/featured_corridor.jpg"
+          src="./images/featured_corridor.jpg"
           alt="Futuristic corridor"
           className="w-full h-full object-cover img-cinematic"
         />
@@ -149,14 +149,14 @@ export default function FeaturedWork({ className = '' }: FeaturedWorkProps) {
         }}
       >
         <img
-          src="/images/project_ecotrack.jpg"
+          src="./images/project_ecotrack.jpg"
           alt="EcoTrack Platform"
           className="w-full h-full object-cover img-cinematic transition-transform duration-700 group-hover:scale-105"
         />
-        
+
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-        
+
         {/* Project info */}
         <div
           ref={projectLabelRef}
@@ -166,7 +166,7 @@ export default function FeaturedWork({ className = '' }: FeaturedWorkProps) {
           <div>
             <span className="micro-text accent-lime">Sustainability Platform</span>
           </div>
-          
+
           {/* Bottom content */}
           <div>
             <h3 className="headline-md text-white mb-3">
@@ -175,8 +175,8 @@ export default function FeaturedWork({ className = '' }: FeaturedWorkProps) {
             <p className="body-text text-[#B8B8B8] mb-4 max-w-sm">
               A sustainability dashboard turning complex data into clear action.
             </p>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="inline-flex items-center gap-2 text-sm font-medium text-white hover:accent-lime transition-colors"
             >
               View case study

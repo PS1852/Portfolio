@@ -67,19 +67,19 @@ export default function SelectedWork({ className = '' }: SelectedWorkProps) {
     {
       title: 'ArtGallery VR',
       tag: 'Web Experience',
-      image: '/images/project_artgallery.jpg',
+      image: './images/project_artgallery.jpg',
       size: 'large',
     },
     {
       title: 'HealthHub',
       tag: 'Product Design',
-      image: '/images/project_healthhub.jpg',
+      image: './images/project_healthhub.jpg',
       size: 'medium',
     },
     {
       title: 'FinanceFlow',
       tag: 'Dashboard',
-      image: '/images/project_financeflow.jpg',
+      image: './images/project_financeflow.jpg',
       size: 'wide',
     },
   ];

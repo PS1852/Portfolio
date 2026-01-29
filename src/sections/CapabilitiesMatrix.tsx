@@ -142,7 +142,7 @@ export default function CapabilitiesMatrix({ className = '' }: CapabilitiesMatri
         }}
       >
         <img
-          src="/images/capabilities_stairwell.jpg"
+          src="./images/capabilities_stairwell.jpg"
           alt="Minimal stairwell"
           className="w-full h-full object-cover img-cinematic"
         />
@@ -213,7 +213,7 @@ export default function CapabilitiesMatrix({ className = '' }: CapabilitiesMatri
         }}
       >
         <img
-          src="/images/capabilities_hallway.jpg"
+          src="./images/capabilities_hallway.jpg"
           alt="Modern hallway"
           className="w-full h-full object-cover img-cinematic"
         />

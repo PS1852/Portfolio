@@ -147,7 +147,7 @@ export default function ProcessSection({ className = '' }: ProcessSectionProps) 
         }}
       >
         <img
-          src="/images/process_stairwell.jpg"
+          src="./images/process_stairwell.jpg"
           alt="Abstract stairwell"
           className="w-full h-full object-cover img-cinematic"
         />
@@ -218,7 +218,7 @@ export default function ProcessSection({ className = '' }: ProcessSectionProps) 
         }}
       >
         <img
-          src="/images/process_corridor.jpg"
+          src="./images/process_corridor.jpg"
           alt="Clean modern corridor"
           className="w-full h-full object-cover img-cinematic"
         />

@@ -85,8 +85,8 @@ export default function HeroSection() {
             </p>
 
             <p className="body-text text-white/60 mb-8 max-w-lg mx-auto lg:mx-0">
-              Crafting digital experiences that captivate and convert. 
-              Specializing in modern web development and stunning graphic design 
+              Crafting digital experiences that captivate and convert.
+              Specializing in modern web development and stunning graphic design
               for businesses that want to stand out.
             </p>
 
@@ -127,7 +127,7 @@ export default function HeroSection() {
           <div ref={imageRef} className="relative">
             <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
               <img
-                src="/images/hero_dev.jpg"
+                src="./images/hero_dev.jpg"
                 alt="Web Development"
                 className="w-full h-auto"
               />

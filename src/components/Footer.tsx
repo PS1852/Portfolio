@@ -15,7 +15,7 @@ export default function Footer() {
           {/* Logo & Copyright */}
           <div className="flex items-center gap-3">
             <img
-              src="/images/logo.png"
+              src="./images/logo.png"
               alt="PWS Logo"
               className="h-10 w-10 object-contain"
             />

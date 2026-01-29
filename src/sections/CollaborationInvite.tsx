@@ -130,7 +130,7 @@ export default function CollaborationInvite({ className = '' }: CollaborationInv
         }}
       >
         <img
-          src="/images/invite_corridor.jpg"
+          src="./images/invite_corridor.jpg"
           alt="Minimal corridor"
           className="w-full h-full object-cover img-cinematic"
         />
@@ -148,14 +148,14 @@ export default function CollaborationInvite({ className = '' }: CollaborationInv
         }}
       >
         <img
-          src="/images/invite_stairwell.jpg"
+          src="./images/invite_stairwell.jpg"
           alt="Dramatic stairwell"
           className="w-full h-full object-cover img-cinematic"
         />
-        
+
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-        
+
         {/* CTA Overlay */}
         <div
           ref={ctaRef}
@@ -166,8 +166,8 @@ export default function CollaborationInvite({ className = '' }: CollaborationInv
               <Phone size={16} />
               Request a Call
             </a>
-            <a 
-              href="#" 
+            <a
+              href="#"
               className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
             >
               <Download size={14} />

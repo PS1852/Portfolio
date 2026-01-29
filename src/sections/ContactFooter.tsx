@@ -103,35 +103,35 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
             <p className="body-text text-[#888] mb-8 max-w-md">
               Share a brief. We'll reply within 2 business days.
             </p>
-            
+
             {/* Contact Info */}
             <div className="space-y-4">
-              <a 
-                href="mailto:hello@pranjalweb.studio" 
+              <a
+                href="mailto:hello@pranjalweb.studio"
                 className="flex items-center gap-3 text-white hover:accent-lime transition-colors"
               >
                 <Mail size={18} className="text-[#DFFF00]" />
                 <span className="body-text">hello@pranjalweb.studio</span>
               </a>
-              
+
               {/* Social Links */}
               <div className="flex items-center gap-4 pt-4">
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
                   aria-label="GitHub"
                 >
                   <Github size={18} className="text-[#888]" />
                 </a>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
                   aria-label="LinkedIn"
                 >
                   <Linkedin size={18} className="text-[#888]" />
                 </a>
-                <a 
-                  href="#" 
+                <a
+                  href="#"
                   className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"
                   aria-label="Dribbble"
                 >
@@ -152,7 +152,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
                 required
               />
             </div>
-            
+
             <div className="form-field">
               <label className="micro-text text-[#666] mb-2 block">Email</label>
               <input
@@ -162,7 +162,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
                 required
               />
             </div>
-            
+
             <div className="form-field">
               <label className="micro-text text-[#666] mb-2 block">Budget Range</label>
               <select className="w-full bg-black/50 text-white border border-white/10 rounded-lg px-4 py-3 focus:border-[#DFFF00] focus:outline-none">
@@ -173,7 +173,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
                 <option value="100k+" className="bg-black">$100,000+</option>
               </select>
             </div>
-            
+
             <div className="form-field">
               <label className="micro-text text-[#666] mb-2 block">Message</label>
               <textarea
@@ -183,7 +183,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
                 required
               />
             </div>
-            
+
             <div className="form-field pt-2">
               <button
                 type="submit"
@@ -208,14 +208,14 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
           className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
         >
           <div className="flex items-center gap-3">
-            <img 
-              src="/images/logo.png" 
-              alt="Pranjal Web Studio" 
+            <img
+              src="./images/logo.png"
+              alt="Pranjal Web Studio"
               className="h-8 w-auto opacity-80"
             />
             <span className="micro-text text-[#666]">Pranjal Web Studio</span>
           </div>
-          
+
           <p className="micro-text text-[#444]">
             © 2026 Pranjal Web Studio. All rights reserved.
           </p>
