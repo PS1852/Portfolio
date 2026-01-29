@@ -92,7 +92,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
 
     const subject = `Website inquiry - ${budget || 'No budget specified'}`;
     const body = `Name: ${name}\nEmail: ${email}\nBudget: ${budget}\n\nMessage:\n${message}`;
-    const mailto = `mailto:hello@pranjalweb.studio?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailto = `mailto:pranjalshrivastav5@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setIsSubmitted(true);
     // Open default mail client (or webmail handler)
@@ -121,11 +121,11 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
             {/* Contact Info */}
             <div className="space-y-4">
               <a
-                href="mailto:hello@pranjalweb.studio"
+                href="mailto:pranjalshrivastav5@gmail.com"
                 className="flex items-center gap-3 text-white hover:accent-lime transition-colors"
               >
                 <Mail size={18} className="text-[#DFFF00]" />
-                <span className="body-text">hello@pranjalweb.studio</span>
+                <span className="body-text">pranjalshrivastav5@gmail.com</span>
               </a>
 
               {/* Social Links */}
