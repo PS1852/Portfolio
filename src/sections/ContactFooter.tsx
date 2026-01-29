@@ -82,7 +82,21 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const form = formRef.current;
+    if (!form) return;
+    const fd = new FormData(form as HTMLFormElement);
+    const name = fd.get('name')?.toString() ?? '';
+    const email = fd.get('email')?.toString() ?? '';
+    const budget = fd.get('budget')?.toString() ?? '';
+    const message = fd.get('message')?.toString() ?? '';
+
+    const subject = `Website inquiry - ${budget || 'No budget specified'}`;
+    const body = `Name: ${name}\nEmail: ${email}\nBudget: ${budget}\n\nMessage:\n${message}`;
+    const mailto = `mailto:hello@pranjalweb.studio?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
     setIsSubmitted(true);
+    // Open default mail client (or webmail handler)
+    window.location.href = mailto;
     setTimeout(() => setIsSubmitted(false), 3000);
   };
 
@@ -147,6 +161,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
               <label className="micro-text text-[#666] mb-2 block">Name</label>
               <input
                 type="text"
+                name="name"
                 placeholder="Your name"
                 className="w-full"
                 required
@@ -157,6 +172,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
               <label className="micro-text text-[#666] mb-2 block">Email</label>
               <input
                 type="email"
+                name="email"
                 placeholder="your@email.com"
                 className="w-full"
                 required
@@ -165,7 +181,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
 
             <div className="form-field">
               <label className="micro-text text-[#666] mb-2 block">Budget Range</label>
-              <select className="w-full bg-black/50 text-white border border-white/10 rounded-lg px-4 py-3 focus:border-[#DFFF00] focus:outline-none">
+              <select name="budget" className="w-full bg-black/50 text-white border border-white/10 rounded-lg px-4 py-3 focus:border-[#DFFF00] focus:outline-none">
                 <option value="" className="bg-black">Select a range</option>
                 <option value="10k-25k" className="bg-black">$10,000 - $25,000</option>
                 <option value="25k-50k" className="bg-black">$25,000 - $50,000</option>
@@ -177,6 +193,7 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
             <div className="form-field">
               <label className="micro-text text-[#666] mb-2 block">Message</label>
               <textarea
+                name="message"
                 placeholder="Tell us about your project..."
                 rows={4}
                 className="w-full resize-none"

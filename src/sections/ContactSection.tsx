@@ -75,19 +75,32 @@ export default function ContactSection() {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const subjectMap: Record<string, string> = {
+      'web-development': 'Web Development',
+      'graphic-design': 'Graphic Design',
+      'ui-ux-design': 'UI/UX Design',
+      'other': 'Other'
+    };
+
+    const subjectText = formData.subject ? (subjectMap[formData.subject] ?? formData.subject) : 'New inquiry';
+
+    const body = `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${subjectText}\n\nMessage:\n${formData.message}`;
+
+    const mailto = `mailto:pranjalshrivastav5@gmail.com?subject=${encodeURIComponent(subjectText)}&body=${encodeURIComponent(body)}`;
+
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
-
-    // Reset success message after 5 seconds
-    setTimeout(() => setIsSubmitted(false), 5000);
+    // small delay to show button state, then open mail client
+    setTimeout(() => {
+      setIsSubmitting(false);
+      window.location.href = mailto;
+      setIsSubmitted(true);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    }, 300);
   };
 
   return (
