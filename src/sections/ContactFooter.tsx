@@ -92,11 +92,11 @@ export default function ContactFooter({ className = '' }: ContactFooterProps) {
 
     const subject = `Website inquiry - ${budget || 'No budget specified'}`;
     const body = `Name: ${name}\nEmail: ${email}\nBudget: ${budget}\n\nMessage:\n${message}`;
-    const mailto = `mailto:pranjalshrivastav5@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=pranjalshrivastav5@gmail.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
     setIsSubmitted(true);
-    // Open default mail client (or webmail handler)
-    window.location.href = mailto;
+    // Open Gmail in new tab
+    window.open(gmailUrl, '_blank');
     setTimeout(() => setIsSubmitted(false), 3000);
   };
 

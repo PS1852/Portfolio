@@ -89,14 +89,14 @@ export default function ContactSection() {
 
     const body = `Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${subjectText}\n\nMessage:\n${formData.message}`;
 
-    const mailto = `mailto:pranjalshrivastav5@gmail.com?subject=${encodeURIComponent(subjectText)}&body=${encodeURIComponent(body)}`;
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=pranjalshrivastav5@gmail.com&subject=${encodeURIComponent(subjectText)}&body=${encodeURIComponent(body)}`;
 
     setIsSubmitting(true);
 
-    // small delay to show button state, then open mail client
+    // small delay to show button state, then open Gmail
     setTimeout(() => {
       setIsSubmitting(false);
-      window.location.href = mailto;
+      window.open(gmailUrl, '_blank');
       setIsSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setIsSubmitted(false), 5000);
