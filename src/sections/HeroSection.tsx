@@ -185,36 +185,39 @@ export default function HeroSection() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 2.0, duration: 0.6 }}
-            className="flex items-center gap-3 mb-10"
+            className="flex items-center justify-center md:justify-start gap-3 mb-10 md:mb-10"
           >
             <div className="w-8 h-px bg-emerald-500" />
-            <span className="text-xs tracking-[0.25em] uppercase text-emerald-700 font-mono font-medium">
+            <span className="text-xs tracking-[0.25em] uppercase text-emerald-700 font-mono font-medium text-center md:text-left">
               Frontend Developer & Graphic Designer
             </span>
+            <div className="w-8 h-px bg-emerald-500 md:hidden" />
           </motion.div>
 
           {/* Mobile Mini Emerald — shown only below md */}
-          <div className="md:hidden flex justify-center mb-6">
-            <Logo3D size={140} />
+          <div className="md:hidden flex justify-center mb-8 relative pointer-events-auto">
+            <div className="absolute inset-0 bg-emerald-300 rounded-full blur-[80px] opacity-20" />
+            <Logo3D size={180} />
           </div>
 
           {/* Main heading */}
-          <div ref={nameRef} style={{ opacity: 0 }} className="overflow-hidden mb-4 md:mb-6">
+          <div ref={nameRef} style={{ opacity: 0 }} className="overflow-hidden mb-6 text-center md:text-left">
             <h1 className="heading-xl text-ink">
               Crafting{' '}
               <em
-                className="block gradient-text not-italic"
+                className="block md:inline-block gradient-text mt-2 md:mt-0 not-italic"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 Visionary
               </em>
-              Interfaces
+              <br className="hidden md:block" />
+              {' '}Interfaces
             </h1>
           </div>
 
-          <div ref={taglineRef} style={{ opacity: 0 }} className="mb-8">
+          <div ref={taglineRef} style={{ opacity: 0 }} className="mb-6 md:mb-8 text-center md:text-left">
             <p
-              className="text-xl md:text-2xl lg:text-3xl font-light"
+              className="text-xl md:text-2xl lg:text-3xl font-light mx-auto md:mx-0"
               style={{ fontFamily: 'Outfit, sans-serif', color: '#4B5E54', maxWidth: '700px' }}
             >
               That{' '}
@@ -224,9 +227,9 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div ref={descRef} style={{ opacity: 0 }} className="mb-12">
+          <div ref={descRef} style={{ opacity: 0 }} className="mb-10 md:mb-12 text-center md:text-left">
             <p
-              className="body-lg max-w-xl"
+              className="body-lg max-w-xl mx-auto md:mx-0 text-sm md:text-base"
               style={{ color: '#6B7F75', lineHeight: 1.7 }}
             >
               Specializing in high-end frontend architecture and aesthetic graphic design
@@ -234,10 +237,10 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div ref={ctaRef} style={{ opacity: 0 }} className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-12 md:mb-20">
+          <div ref={ctaRef} style={{ opacity: 0 }} className="flex flex-col sm:flex-row flex-wrap items-center sm:items-center justify-center md:justify-start gap-4 mb-2 md:mb-20">
             <button
               onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-primary magnetic-btn group justify-center"
+              className="btn-primary magnetic-btn group justify-center w-full sm:w-auto"
             >
               <span>View My Work</span>
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="transition-transform group-hover:translate-x-1 duration-300">
@@ -246,14 +249,14 @@ export default function HeroSection() {
             </button>
             <button
               onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-outline magnetic-btn justify-center"
+              className="btn-outline magnetic-btn justify-center w-full sm:w-auto"
             >
               Start a Conversation
             </button>
           </div>
 
           {/* Social links */}
-          <div className="flex items-center gap-6">
+          <div className="hidden md:flex items-center gap-6">
             <a
               href="https://github.com/PS1852"
               target="_blank"
@@ -278,11 +281,11 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll indicator - Desktop only */}
       <div
         ref={scrollRef}
         style={{ opacity: 0, zIndex: 10 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-3"
       >
         <span className="text-[10px] tracking-[0.3em] uppercase text-emerald-600/60 font-mono font-bold">Scroll Down</span>
         <div className="w-px h-14 bg-gradient-to-b from-emerald-500 via-emerald-200 to-transparent relative overflow-hidden">
@@ -290,26 +293,27 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Stats strip — mobile: horizontal scroll, desktop: fixed bottom-right */}
-      <div
-        className="flex md:hidden items-center justify-center gap-6 px-5 py-5 border-t border-emerald-100"
-        style={{ zIndex: 15 }}
-      >
-        <div className="text-center">
-          <div className="text-2xl font-bold text-ink font-display leading-none">100+</div>
-          <div className="text-[9px] text-muted font-mono tracking-widest uppercase mt-1">Projects</div>
-        </div>
-        <div className="w-px h-8 bg-emerald-200" />
-        <div className="text-center">
-          <div className="text-2xl font-bold text-ink font-display leading-none">5+</div>
-          <div className="text-[9px] text-muted font-mono tracking-widest uppercase mt-1">Years</div>
-        </div>
-        <div className="w-px h-8 bg-emerald-200" />
-        <div className="text-center">
-          <div className="text-2xl font-bold text-ink font-display leading-none">99%</div>
-          <div className="text-[9px] text-muted font-mono tracking-widest uppercase mt-1">Satisfaction</div>
+      {/* Stats strip — mobile: Glassmorphic horizontally scrolling or wrapped component, desktop: fixed bottom-right */}
+      <div className="md:hidden px-4 pb-8 w-full relative z-[15]">
+        <div className="glass-card bg-white/70 backdrop-blur-xl border border-border-green rounded-2xl flex items-center justify-between p-5 shadow-lg">
+          <div className="text-center flex-1">
+            <div className="text-2xl font-bold text-ink font-display leading-none">100+</div>
+            <div className="text-[8px] text-muted font-mono tracking-widest uppercase mt-2">Projects</div>
+          </div>
+          <div className="w-px h-10 bg-emerald-100" />
+          <div className="text-center flex-1">
+            <div className="text-2xl font-bold text-ink font-display leading-none">5+</div>
+            <div className="text-[8px] text-muted font-mono tracking-widest uppercase mt-2">Years</div>
+          </div>
+          <div className="w-px h-10 bg-emerald-100" />
+          <div className="text-center flex-1">
+            <div className="text-2xl font-bold text-ink font-display leading-none">99%</div>
+            <div className="text-[8px] text-muted font-mono tracking-widest uppercase mt-2">Satisfaction</div>
+          </div>
         </div>
       </div>
+      
+      {/* Desktop stats strip */}
       <div
         className="absolute bottom-0 right-0 hidden lg:flex items-center gap-10 section-padding py-8"
         style={{ zIndex: 15, background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.8))' }}

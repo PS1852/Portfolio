@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
+import { Logo3D } from './shared/Logo3D'
+
 export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const brandRef = useRef<HTMLDivElement>(null)
@@ -108,8 +110,8 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
           className="text-center"
         >
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center text-white text-2xl font-bold font-serif">
-              P
+            <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center -ml-4">
+              <Logo3D size={120} />
             </div>
             <h1
               className="text-5xl md:text-7xl font-bold tracking-tight"
