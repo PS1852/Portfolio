@@ -27,9 +27,9 @@ export default function Footer() {
       </div>
 
       <div className="section-padding max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-3 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
-          <div className="col-span-1">
+          <div className="col-span-1 flex flex-col md:block items-center md:items-start text-center md:text-left">
             <div className="flex items-center gap-2 mb-4">
               <div className="w-14 h-14 -ml-4">
                 <Logo3D size={56} />
@@ -78,11 +78,11 @@ export default function Footer() {
           </div>
 
           {/* Quick Nav */}
-          <div>
+          <div className="text-center md:text-left">
             <p className="text-xs font-mono tracking-[0.2em] uppercase text-emerald-500 mb-6">Navigation</p>
-            <ul className="space-y-3">
+            <ul className="grid grid-cols-2 md:grid-cols-1 gap-3 max-w-[240px] mx-auto md:mx-0">
               {NAV_LINKS.map((link) => (
-                <li key={link.href}>
+                <li key={link.href} className="flex justify-center md:justify-start">
                   <button
                     onClick={() => scrollTo(link.href)}
                     className="text-emerald-300/60 hover:text-emerald-400 text-sm transition-colors duration-300 group flex items-center gap-2"
@@ -96,7 +96,7 @@ export default function Footer() {
           </div>
 
           {/* CTA */}
-          <div>
+          <div className="text-center md:text-left">
             <p className="text-xs font-mono tracking-[0.2em] uppercase text-emerald-500 mb-6">Ready to Start?</p>
             <p className="text-emerald-300/60 text-sm mb-6 leading-relaxed">
               Let's build something exceptional together.
@@ -112,17 +112,17 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-emerald-900">
-          <p className="text-emerald-300/40 text-xs font-mono">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-emerald-900">
+          <p className="text-emerald-300/40 text-[10px] md:text-xs font-mono text-center md:text-left">
             © {currentYear} Pranjal Web Studio. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <span className="text-emerald-300/40 text-xs font-mono">
+          <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+            <span className="text-emerald-300/40 text-[10px] md:text-xs font-mono">
               pranjalshrivastav5@gmail.com
             </span>
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-emerald-400/60 text-xs font-mono">Available for work</span>
+              <span className="text-emerald-400/60 text-[10px] md:text-xs font-mono">Available for work</span>
             </div>
           </div>
         </div>

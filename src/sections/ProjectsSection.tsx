@@ -229,13 +229,13 @@ export default function ProjectsSection() {
           </div>
         </div>
 
-        {/* Category filter */}
-        <div className="flex flex-wrap gap-3 mb-12">
+        {/* Category filter — horizontal scroll on mobile */}
+        <div className="flex gap-3 mb-8 md:mb-12 overflow-x-auto mobile-scroll-hide pb-2 md:pb-0 md:flex-wrap">
           {uniqueCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`tag transition-all duration-300 ${
+              className={`tag transition-all duration-300 whitespace-nowrap flex-shrink-0 ${
                 activeCategory === cat
                   ? 'bg-emerald-600 text-white border-transparent'
                   : 'bg-white text-muted border border-border-green hover:border-emerald-400 hover:text-emerald-700'
@@ -246,10 +246,19 @@ export default function ProjectsSection() {
           ))}
         </div>
 
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        {/* Projects — Mobile: horizontal carousel, Desktop: grid */}
+        <div className="hidden md:grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {filteredProjects.map((project, idx) => (
             <ProjectCard key={project.id} project={project} index={idx} />
+          ))}
+        </div>
+
+        {/* Mobile carousel */}
+        <div className="md:hidden mobile-carousel">
+          {filteredProjects.map((project, idx) => (
+            <div key={project.id} style={{ width: '80vw', maxWidth: '340px' }}>
+              <ProjectCard project={project} index={idx} />
+            </div>
           ))}
         </div>
 

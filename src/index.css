@@ -351,3 +351,90 @@ input:focus, textarea:focus, select:focus {
   transform-style: preserve-3d;
   perspective: 1000px;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE-ONLY STYLES (max-width: 767px)
+   These rules ONLY apply to screens below the md breakpoint.
+   Desktop remains completely untouched.
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+  /* ── Typography scale-down ── */
+  .heading-xl {
+    font-size: 2.5rem !important; /* 40px down from 48px */
+    line-height: 1.05;
+  }
+
+  .heading-lg {
+    font-size: 2rem !important; /* 32px down from 36px */
+    line-height: 1.1;
+  }
+
+  .heading-md {
+    font-size: 1.5rem !important;
+  }
+
+  .body-lg {
+    font-size: 1rem !important;
+  }
+
+  /* ── Compact section spacing ── */
+  section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .section-padding {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  /* ── Mobile scroll-snap carousel ── */
+  .mobile-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .mobile-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-carousel {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .mobile-carousel > * {
+    scroll-snap-align: center;
+    flex-shrink: 0;
+  }
+
+  /* ── Hidden scrollbar for horizontal lists ── */
+  .mobile-scroll-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .mobile-scroll-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* ── Touch targets ── */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* ── iOS safe area ── */
+  footer {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* ── Mobile nav fullscreen overlay ── */
+  .mobile-nav-overlay {
+    background: linear-gradient(165deg, #0A1F14 0%, #061210 60%, #0A1F14 100%);
+  }
+}

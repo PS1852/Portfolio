@@ -107,7 +107,7 @@ Email: ${formData.email}`
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Left: Info */}
           <div ref={infoRef} style={{ opacity: 0 }}>
             <p className="body-lg text-muted mb-10 leading-relaxed">

@@ -65,14 +65,14 @@ function SkillCard({ name, stars, index }: { name: string; stars: number; index:
   return (
     <div
       ref={cardRef}
-      className="flex flex-col items-center p-6 rounded-2xl bg-off-white border border-border-green hover:border-emerald-300 hover:shadow-lg transition-all duration-300 group"
+      className="flex flex-col items-center p-4 md:p-6 rounded-2xl bg-off-white border border-border-green hover:border-emerald-300 hover:shadow-lg transition-all duration-300 group"
       style={{ opacity: 0 }}
     >
       <div ref={starsRef} className="flex gap-1 mb-4 text-emerald-500">
         {[...Array(5)].map((_, i) => (
           <Star
             key={i}
-            size={18}
+            size={typeof window !== 'undefined' && window.innerWidth < 768 ? 14 : 18}
             fill={i < stars ? '#10b981' : 'transparent'}
             className={i < stars ? 'text-emerald-500' : 'text-emerald-200'}
           />
@@ -138,8 +138,9 @@ export default function SkillsSection() {
 
         {/* Floating tags cloud */}
         <div className="relative py-16 border-t border-border-green">
-          <p className="text-center text-xs tracking-[0.25em] uppercase text-muted font-mono mb-10">Also Proficient In</p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <p className="text-center text-xs tracking-[0.25em] uppercase text-muted font-mono mb-8 md:mb-10">Also Proficient In</p>
+          {/* Mobile: horizontal scroll, Desktop: flex wrap */}
+          <div className="flex md:flex-wrap items-center md:justify-center gap-3 overflow-x-auto mobile-scroll-hide -mx-6 px-6 md:mx-0 md:px-0 pb-4 md:pb-0">
             {[
               'GraphQL', 'REST APIs', 'PostgreSQL', 'MongoDB', 'Redis', 'Docker', 'AWS', 'Vercel',
               'Supabase', 'Firebase', 'Prisma', 'Stripe', 'Framer Motion', 'After Effects',
@@ -147,10 +148,10 @@ export default function SkillsSection() {
             ].map((skill, i) => (
               <span
                 key={skill}
-                className="tag bg-off-white text-muted border border-border-green hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-all duration-300"
+                className="tag whitespace-nowrap bg-off-white text-muted border border-border-green hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 transition-all duration-300"
                 style={{
                   animationDelay: `${i * 0.1}s`,
-                  transform: `rotate(${(i % 5 - 2) * 2}deg)`,
+                  transform: typeof window !== 'undefined' && window.innerWidth < 768 ? 'none' : `rotate(${(i % 5 - 2) * 2}deg)`,
                 }}
               >
                 {skill}

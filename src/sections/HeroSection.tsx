@@ -7,6 +7,7 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, Float, MeshTransmissionMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 import ThreeBackground from '@/components/ThreeBackground'
+import { Logo3D } from '@/components/shared/Logo3D'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -136,7 +137,7 @@ export default function HeroSection() {
     >
       {/* Removed distracting wireframe ThreeBackground */}
       
-      {/* Interactive Emerald */}
+      {/* Interactive Emerald — Desktop only */}
       <InteractiveEmerald />
 
       {/* Mesh gradient background */}
@@ -177,7 +178,7 @@ export default function HeroSection() {
       </div>
 
       {/* Main content */}
-      <div className="section-padding relative w-full pt-40 pb-20" style={{ zIndex: 10 }}>
+      <div className="section-padding relative w-full pt-24 md:pt-40 pb-12 md:pb-20" style={{ zIndex: 10 }}>
         <div className="max-w-7xl mx-auto">
           {/* Label */}
           <motion.div
@@ -192,8 +193,13 @@ export default function HeroSection() {
             </span>
           </motion.div>
 
+          {/* Mobile Mini Emerald — shown only below md */}
+          <div className="md:hidden flex justify-center mb-6">
+            <Logo3D size={140} />
+          </div>
+
           {/* Main heading */}
-          <div ref={nameRef} style={{ opacity: 0 }} className="overflow-hidden mb-6">
+          <div ref={nameRef} style={{ opacity: 0 }} className="overflow-hidden mb-4 md:mb-6">
             <h1 className="heading-xl text-ink">
               Crafting{' '}
               <em
@@ -228,10 +234,10 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div ref={ctaRef} style={{ opacity: 0 }} className="flex flex-wrap items-center gap-4 mb-20">
+          <div ref={ctaRef} style={{ opacity: 0 }} className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-12 md:mb-20">
             <button
               onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-primary magnetic-btn group"
+              className="btn-primary magnetic-btn group justify-center"
             >
               <span>View My Work</span>
               <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="transition-transform group-hover:translate-x-1 duration-300">
@@ -240,7 +246,7 @@ export default function HeroSection() {
             </button>
             <button
               onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="btn-outline magnetic-btn"
+              className="btn-outline magnetic-btn justify-center"
             >
               Start a Conversation
             </button>
@@ -284,7 +290,26 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Stats strip */}
+      {/* Stats strip — mobile: horizontal scroll, desktop: fixed bottom-right */}
+      <div
+        className="flex md:hidden items-center justify-center gap-6 px-5 py-5 border-t border-emerald-100"
+        style={{ zIndex: 15 }}
+      >
+        <div className="text-center">
+          <div className="text-2xl font-bold text-ink font-display leading-none">100+</div>
+          <div className="text-[9px] text-muted font-mono tracking-widest uppercase mt-1">Projects</div>
+        </div>
+        <div className="w-px h-8 bg-emerald-200" />
+        <div className="text-center">
+          <div className="text-2xl font-bold text-ink font-display leading-none">5+</div>
+          <div className="text-[9px] text-muted font-mono tracking-widest uppercase mt-1">Years</div>
+        </div>
+        <div className="w-px h-8 bg-emerald-200" />
+        <div className="text-center">
+          <div className="text-2xl font-bold text-ink font-display leading-none">99%</div>
+          <div className="text-[9px] text-muted font-mono tracking-widest uppercase mt-1">Satisfaction</div>
+        </div>
+      </div>
       <div
         className="absolute bottom-0 right-0 hidden lg:flex items-center gap-10 section-padding py-8"
         style={{ zIndex: 15, background: 'linear-gradient(to right, transparent, rgba(255,255,255,0.8))' }}

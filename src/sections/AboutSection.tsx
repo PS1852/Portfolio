@@ -139,9 +139,9 @@ export default function AboutSection() {
       <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full opacity-5 bg-emerald-500 blur-3xl pointer-events-none" />
 
       <div className="section-padding max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24">
-          {/* Left: Text Content */}
-          <div>
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-10 lg:gap-24 items-center mb-16 lg:mb-24">
+          {/* Left: Text Content (moves below image on mobile) */}
+          <div className="w-full">
             <div ref={headingRef} style={{ opacity: 0 }}>
               <div className="flex items-center gap-3 mb-6">
                 <div className="emerald-line" />
@@ -166,11 +166,11 @@ export default function AboutSection() {
                 is where true impact happens.
               </p>
 
-              <div className="flex flex-wrap gap-3 mb-10">
+              <div className="flex overflow-x-auto mobile-scroll-hide pb-2 md:pb-0 gap-3 mb-10 -mx-6 px-6 md:mx-0 md:px-0 md:flex-wrap">
                 {['React', 'Next.js', 'TypeScript', 'GSAP', 'Three.js', 'Figma'].map((skill) => (
                   <span
                     key={skill}
-                    className="tag bg-emerald-50 text-emerald-700 border border-emerald-200"
+                    className="tag bg-emerald-50 text-emerald-700 border border-emerald-200 whitespace-nowrap flex-shrink-0"
                   >
                     {skill}
                   </span>
@@ -232,7 +232,7 @@ export default function AboutSection() {
         <div
           ref={statsRef}
           style={{ opacity: 0 }}
-          className="grid grid-cols-3 gap-8 py-12 border-t border-b border-border-green"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 py-10 md:py-12 border-t border-b border-border-green"
         >
           {STATS.map((stat) => (
             <AnimatedCounter

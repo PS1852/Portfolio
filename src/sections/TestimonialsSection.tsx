@@ -11,6 +11,8 @@ export default function TestimonialsSection() {
   const headingRef = useRef<HTMLDivElement>(null)
   const carouselRef = useRef<HTMLDivElement>(null)
   const [current, setCurrent] = useState(0)
+  const touchStartX = useRef(0)
+  const touchEndX = useRef(0)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -53,6 +55,21 @@ export default function TestimonialsSection() {
         )
       },
     })
+  }
+
+  // Touch swipe handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX
+  }
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX
+  }
+  const handleTouchEnd = () => {
+    const diff = touchStartX.current - touchEndX.current
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) goTo(current + 1) // swipe left = next
+      else goTo(current - 1) // swipe right = prev
+    }
   }
 
   const t = TESTIMONIALS[current]
@@ -108,8 +125,11 @@ export default function TestimonialsSection() {
           ref={carouselRef}
           style={{ opacity: 0 }}
           className="relative"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
         >
-          <div className="glass-card p-10 md:p-14 text-center"
+          <div className="glass-card p-6 md:p-10 lg:p-14 text-center"
             style={{
               background: 'rgba(255,255,255,0.04)',
               backdropFilter: 'blur(20px)',
@@ -168,7 +188,7 @@ export default function TestimonialsSection() {
                   key={i}
                   onClick={() => goTo(i)}
                   className={`transition-all duration-300 rounded-full ${
-                    i === current ? 'w-6 h-2 bg-emerald-400' : 'w-2 h-2 bg-emerald-700'
+                    i === current ? 'w-8 h-2.5 md:w-6 md:h-2 bg-emerald-400' : 'w-2.5 h-2.5 md:w-2 md:h-2 bg-emerald-700'
                   }`}
                   aria-label={`Go to testimonial ${i + 1}`}
                 />
