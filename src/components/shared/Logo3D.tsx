@@ -20,14 +20,14 @@ export function LogoGemPrimitive({ scale = 1 }: { scale?: number }) {
   return (
     <mesh rotation={[Math.PI / 6, Math.PI / 4, 0]} scale={scale}>
       <primitive object={geometry} attach="geometry" />
-      <MeshTransmissionMaterial 
-        backside
-        color="#10b981"
-        transmission={0.95} 
-        thickness={1} 
-        roughness={0.1}
-        ior={2.4} 
-        chromaticAberration={0.05}
+      <meshPhongMaterial 
+        color="#10b981" 
+        emissive="#065f46"
+        emissiveIntensity={0.5}
+        shininess={100}
+        specular="#ffffff"
+        transparent
+        opacity={0.9}
       />
     </mesh>
   )
