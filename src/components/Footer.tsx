@@ -65,7 +65,9 @@ export default function Footer() {
                 <Github size={16} />
               </a>
               <a
-                href="mailto:pranjalshrivastav5@gmail.com"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=pranjalshrivastav5@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-lg border border-emerald-800 flex items-center justify-center text-emerald-400 hover:bg-emerald-600 hover:border-emerald-600 transition-all duration-300"
                 aria-label="Email"
               >

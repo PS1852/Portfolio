@@ -156,14 +156,14 @@ export default function AboutSection() {
 
             <div ref={textRef} style={{ opacity: 0 }}>
               <p className="body-lg text-muted mb-6 leading-relaxed">
-                Crafting digital experiences that captivate and convert. Specializing in modern web development
-                and stunning graphic design for businesses that want to stand out.
+                Crafting digital experiences that captivate and convert. Specializing in high-end frontend development
+                and stunning graphic design for brands that want to stand out.
               </p>
               <p className="body-md text-muted leading-relaxed mb-8">
-                Founded in 2019, Pranjal Web Studio has grown from a freelance design practice into a
-                studio trusted by 100+ clients globally. Every project is approached with the same
-                obsessive attention to detail — because the difference between good and exceptional
-                is always in the details.
+                Founded in 2019, Pranjal Web Studio has grown into a
+                design-led practice trusted by 100+ clients globally. Every project is approached with a 
+                designer's eye and a developer's precision — because the fusion of form and function
+                is where true impact happens.
               </p>
 
               <div className="flex flex-wrap gap-3 mb-10">
@@ -200,8 +200,8 @@ export default function AboutSection() {
           >
             <div className="relative rounded-2xl overflow-hidden aspect-[4/5] shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
-                alt="Creative workspace"
+                src="./images/interaction.png"
+                alt="Digital Interaction"
                 className="w-full h-full object-cover ken-burns"
               />
               {/* Overlay */}

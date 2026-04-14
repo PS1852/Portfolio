@@ -50,9 +50,9 @@ export const experience = [
   },
   {
     company: "Freelance",
-    role: "Full Stack Engineer & UI/UX Designer",
+    role: "Frontend Developer & Graphic Designer",
     dates: "2018 - 2019",
-    description: "Designed and developed scalable web applications for emerging startups, specializing in React and modern CSS."
+    description: "Designed and developed high-performance web interfaces and brand identities for emerging startups."
   }
 ];
 

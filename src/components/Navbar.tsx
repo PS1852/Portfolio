@@ -41,8 +41,8 @@ export default function Navbar() {
         transition={{ duration: 0.7, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
           scrolled
-            ? 'py-4 bg-white/90 backdrop-blur-xl border-b border-emerald-100 shadow-sm'
-            : 'py-6'
+            ? 'py-4 bg-white/95 backdrop-blur-xl border-b border-emerald-100 shadow-sm'
+            : 'py-6 bg-white/40 backdrop-blur-sm'
         }`}
       >
         <div className="section-padding flex items-center justify-between">

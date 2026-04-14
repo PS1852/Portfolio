@@ -5,113 +5,82 @@ import { SKILLS } from '@/data'
 
 gsap.registerPlugin(ScrollTrigger)
 
+import { Star } from 'lucide-react'
+
 const SKILL_DETAILS = [
-  { name: 'React', level: 98, color: '#61DAFB', bg: '#ecfdf5', text: '#065f46' },
-  { name: 'Next.js', level: 95, color: '#000000', bg: '#f0f4f2', text: '#0F1F17' },
-  { name: 'TypeScript', level: 92, color: '#3178C6', bg: '#ecfdf5', text: '#065f46' },
-  { name: 'Node.js', level: 90, color: '#68A063', bg: '#f0f4f2', text: '#0F1F17' },
-  { name: 'Three.js', level: 85, color: '#000000', bg: '#ecfdf5', text: '#065f46' },
-  { name: 'GSAP', level: 93, color: '#88CE02', bg: '#f0f4f2', text: '#0F1F17' },
-  { name: 'Tailwind CSS', level: 97, color: '#06B6D4', bg: '#ecfdf5', text: '#065f46' },
-  { name: 'Figma', level: 90, color: '#F24E1E', bg: '#f0f4f2', text: '#0F1F17' },
-  { name: 'Adobe Illustrator', level: 85, color: '#FF9A00', bg: '#ecfdf5', text: '#065f46' },
-  { name: 'WebGL', level: 80, color: '#990000', bg: '#f0f4f2', text: '#0F1F17' },
+  { name: 'React / Next.js', stars: 5, color: '#10b981' },
+  { name: 'TypeScript', stars: 5, color: '#10b981' },
+  { name: 'UI / UX Design', stars: 5, color: '#10b981' },
+  { name: 'Graphic Design', stars: 5, color: '#10b981' },
+  { name: 'GSAP Animation', stars: 5, color: '#10b981' },
+  { name: 'Tailwind CSS', stars: 5, color: '#10b981' },
+  { name: 'Figma', stars: 5, color: '#10b981' },
+  { name: 'Adobe Illustrator', stars: 4, color: '#10b981' },
+  { name: 'Brand Identity', stars: 5, color: '#10b981' },
+  { name: 'Three.js / WebGL', stars: 4, color: '#10b981' },
 ]
 
-function SkillOrb({ name, level, index }: { name: string; level: number; index: number }) {
-  const orbRef = useRef<HTMLDivElement>(null)
-  const ringRef = useRef<SVGCircleElement>(null)
-  const hasAnimated = useRef(false)
+function SkillCard({ name, stars, index }: { name: string; stars: number; index: number }) {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const starsRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const el = orbRef.current
+    const el = cardRef.current
     if (!el) return
 
-    const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 88%',
-      onEnter: () => {
-        if (hasAnimated.current) return
-        hasAnimated.current = true
+    gsap.fromTo(
+      el,
+      { y: 30, opacity: 0 },
+      {
+        y: 0, opacity: 1,
+        duration: 0.6,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+        },
+        delay: index * 0.05,
+      }
+    )
 
-        gsap.fromTo(
-          el,
-          { scale: 0, opacity: 0, rotate: -90 },
-          {
-            scale: 1, opacity: 1, rotate: 0,
-            duration: 0.7,
-            ease: 'back.out(1.7)',
-            delay: index * 0.07,
-          }
-        )
-
-        if (ringRef.current) {
-          const circumference = 2 * Math.PI * 38
-          const offset = circumference - (level / 100) * circumference
-          gsap.fromTo(
-            ringRef.current,
-            { strokeDashoffset: circumference },
-            {
-              strokeDashoffset: offset,
-              duration: 1.2,
-              ease: 'power3.out',
-              delay: index * 0.07 + 0.3,
-            }
-          )
+    if (starsRef.current) {
+      gsap.fromTo(
+        starsRef.current.children,
+        { scale: 0, opacity: 0 },
+        {
+          scale: 1, opacity: 1,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+          },
+          delay: index * 0.05 + 0.3,
         }
-      },
-    })
-
-    return () => trigger.kill()
-  }, [index, level])
-
-  const circumference = 2 * Math.PI * 38
+      )
+    }
+  }, [index])
 
   return (
     <div
-      ref={orbRef}
-      className="flex flex-col items-center gap-3 group"
+      ref={cardRef}
+      className="flex flex-col items-center p-6 rounded-2xl bg-off-white border border-border-green hover:border-emerald-300 hover:shadow-lg transition-all duration-300 group"
       style={{ opacity: 0 }}
     >
-      <div className="relative w-24 h-24">
-        {/* SVG Ring */}
-        <svg width="96" height="96" viewBox="0 0 96 96" className="-rotate-90">
-          {/* Background ring */}
-          <circle
-            cx="48" cy="48" r="38"
-            fill="none"
-            stroke="#D1E7DD"
-            strokeWidth="6"
+      <div ref={starsRef} className="flex gap-1 mb-4 text-emerald-500">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            size={18}
+            fill={i < stars ? '#10b981' : 'transparent'}
+            className={i < stars ? 'text-emerald-500' : 'text-emerald-200'}
           />
-          {/* Progress ring */}
-          <circle
-            ref={ringRef}
-            cx="48" cy="48" r="38"
-            fill="none"
-            stroke="#10b981"
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={circumference}
-          />
-        </svg>
-
-        {/* Center content */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <span className="text-sm font-bold text-emerald-700">{level}%</span>
-          </div>
-        </div>
+        ))}
       </div>
-
-      <div className="text-center">
-        <p
-          className="text-sm font-semibold text-ink group-hover:text-emerald-700 transition-colors duration-300"
-          style={{ fontFamily: 'Inter, sans-serif' }}
-        >
-          {name}
-        </p>
-      </div>
+      <p className="text-sm font-bold text-ink group-hover:text-emerald-700 transition-colors uppercase tracking-wider text-center">
+        {name}
+      </p>
     </div>
   )
 }
@@ -160,10 +129,10 @@ export default function SkillsSection() {
           </p>
         </div>
 
-        {/* Skills orbs grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-20">
+        {/* Skills cards grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-20">
           {SKILL_DETAILS.map((skill, i) => (
-            <SkillOrb key={skill.name} name={skill.name} level={skill.level} index={i} />
+            <SkillCard key={skill.name} name={skill.name} stars={skill.stars} index={i} />
           ))}
         </div>
 

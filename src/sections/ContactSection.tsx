@@ -123,7 +123,9 @@ Email: ${formData.email}`
                 <div>
                   <p className="text-xs text-muted font-mono tracking-wider uppercase mb-1">Email</p>
                   <a
-                    href="mailto:pranjalshrivastav5@gmail.com"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=pranjalshrivastav5@gmail.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-ink hover:text-emerald-600 transition-colors font-medium"
                   >
                     pranjalshrivastav5@gmail.com

@@ -55,21 +55,21 @@ function Scene() {
 
       <FloatingShape
         geometry={icosa}
-        position={[-4, 1, -3]}
+        position={[-3, 4, -2]}
         speed={0.3}
         rotationAxis={[0.5, 0.3, 0.1]}
         color="#10b981"
       />
       <FloatingShape
         geometry={torus}
-        position={[4, -1, -2]}
+        position={[3, 2, -1]}
         speed={0.2}
         rotationAxis={[0.1, 0.5, 0.3]}
         color="#059669"
       />
       <FloatingShape
         geometry={torusKnot}
-        position={[0, 2, -4]}
+        position={[0, 5, -3]}
         speed={0.15}
         rotationAxis={[0.2, 0.4, 0.1]}
         color="#34d399"
