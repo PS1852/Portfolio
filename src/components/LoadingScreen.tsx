@@ -1,15 +1,14 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-
 import { Logo3D } from './shared/Logo3D'
 
 export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null)
+  const bgRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const brandRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
   const taglineRef = useRef<HTMLDivElement>(null)
-  const panelLeftRef = useRef<HTMLDivElement>(null)
-  const panelRightRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -20,11 +19,11 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
 
     tl.set(containerRef.current, { opacity: 1 })
 
-    // Brand name letter reveal
+    // Brand name and logo reveal
     tl.fromTo(
       brandRef.current,
-      { clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)', opacity: 0 },
-      { clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)', opacity: 1, duration: 0.8, ease: 'power4.out' }
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: 'power4.out' }
     )
 
     // Line grows
@@ -32,30 +31,31 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
       lineRef.current,
       { scaleX: 0 },
       { scaleX: 1, duration: 0.6, ease: 'power3.inOut' },
-      '-=0.2'
+      '-=0.4'
     )
 
     // Tagline appears
     tl.fromTo(
       taglineRef.current,
-      { y: 20, opacity: 0 },
+      { y: 15, opacity: 0 },
       { y: 0, opacity: 1, duration: 0.5, ease: 'power3.out' },
       '-=0.2'
     )
 
-    // Hold
-    tl.to({}, { duration: 0.8 })
+    // Hold for user to appreciate the 3D logo
+    tl.to({}, { duration: 1.5 })
 
-    // Panels slide out
+    // Content fades out
     tl.to(
-      panelLeftRef.current,
-      { x: '-100%', duration: 0.8, ease: 'power4.inOut' },
-      '+=0.1'
+      contentRef.current,
+      { y: -30, opacity: 0, duration: 0.6, ease: 'power3.in' }
     )
+
+    // Single seamless background slides up like a curtain
     tl.to(
-      panelRightRef.current,
-      { x: '100%', duration: 0.8, ease: 'power4.inOut' },
-      '<'
+      bgRef.current,
+      { y: '-100%', duration: 0.8, ease: 'power4.inOut' },
+      '-=0.2'
     )
 
     return () => {
@@ -68,77 +68,61 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
       id="loading-screen"
       ref={containerRef}
       style={{ opacity: 1 }}
-      className="fixed inset-0 z-[9998] flex overflow-hidden"
+      className="fixed inset-0 z-[9998] flex overflow-hidden bg-white"
     >
-      {/* Left Panel */}
+      {/* Single seamless background (fixes WebGL alpha transmission boundaries) */}
       <div
-        ref={panelLeftRef}
-        className="absolute inset-0 w-1/2 left-0 z-10 flex items-center justify-end pr-8"
-        style={{ background: 'linear-gradient(135deg, #0A1F14 0%, #0d2b1a 100%)' }}
+        ref={bgRef}
+        className="absolute inset-0 w-full h-full z-10"
+        style={{ 
+          background: 'linear-gradient(165deg, #06160F 0%, #030A07 50%, #06160F 100%)',
+          boxShadow: 'inset 0 0 100px rgba(16, 185, 129, 0.05)'
+        }}
       />
 
-      {/* Right Panel */}
-      <div
-        ref={panelRightRef}
-        className="absolute inset-0 w-1/2 right-0 left-1/2 z-10"
-        style={{ background: 'linear-gradient(135deg, #0d2b1a 0%, #061210 100%)' }}
-      />
-
-      {/* Center content - above panels */}
-      <div className="relative z-20 flex flex-col items-center justify-center w-full">
-        {/* Floating decorative dots */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(8)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full bg-emerald-500 opacity-20"
-              style={{
-                width: `${Math.random() * 6 + 3}px`,
-                height: `${Math.random() * 6 + 3}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animation: `float ${4 + i}s ease-in-out infinite`,
-                animationDelay: `${i * 0.3}s`,
-              }}
-            />
-          ))}
-        </div>
+      {/* Center content */}
+      <div 
+        ref={contentRef}
+        className="relative z-20 flex flex-col items-center justify-center w-full min-h-screen pb-10"
+      >
+        {/* Deep background glow matching the emerald */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
 
         <div
           ref={brandRef}
-          style={{ clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)' }}
-          className="text-center"
+          className="flex flex-col items-center justify-center gap-6"
         >
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center -ml-4">
-              <Logo3D size={120} />
-            </div>
-            <h1
-              className="text-5xl md:text-7xl font-bold tracking-tight"
-              style={{
-                fontFamily: 'Playfair Display, serif',
-                background: 'linear-gradient(135deg, #ffffff, #a7f3d0)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              PWS
-            </h1>
+          <div className="w-24 h-24 md:w-32 md:h-32 flex items-center justify-center relative pointer-events-auto">
+            {/* Soft highlight behind the gem */}
+            <div className="absolute inset-0 bg-emerald-400/20 rounded-full blur-2xl" />
+            <Logo3D size={160} />
           </div>
+          
+          <h1
+            className="text-4xl md:text-6xl font-bold tracking-tight text-center"
+            style={{
+              fontFamily: 'Playfair Display, serif',
+              background: 'linear-gradient(135deg, #ffffff, #a7f3d0)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            PRANJAL<br/>WEB STUDIO
+          </h1>
         </div>
 
         <div
           ref={lineRef}
-          className="w-48 h-px bg-emerald-500 my-6"
-          style={{ transformOrigin: 'left center' }}
+          className="w-16 h-px bg-emerald-500 my-8"
+          style={{ transformOrigin: 'center center' }}
         />
 
         <div ref={taglineRef} style={{ opacity: 0 }}>
           <p
-            className="text-emerald-300 text-sm tracking-[0.3em] uppercase font-mono"
+            className="text-emerald-400/80 text-[10px] md:text-xs tracking-[0.4em] md:tracking-[0.6em] uppercase font-mono text-center"
           >
-            Pranjal Web Studio
+            Visionary Interfaces
           </p>
         </div>
       </div>
