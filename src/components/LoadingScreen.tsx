@@ -4,11 +4,13 @@ import { Logo3D } from './shared/Logo3D'
 
 export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const bgRef = useRef<HTMLDivElement>(null)
+  const panelLeftRef = useRef<HTMLDivElement>(null)
+  const panelRightRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const brandRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
   const taglineRef = useRef<HTMLDivElement>(null)
+  const glowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -43,19 +45,24 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
     )
 
     // Hold for user to appreciate the 3D logo
-    tl.to({}, { duration: 1.5 })
+    tl.to({}, { duration: 1.2 })
 
-    // Content fades out
+    // Content and glow fade out simultaneously
     tl.to(
-      contentRef.current,
-      { y: -30, opacity: 0, duration: 0.6, ease: 'power3.in' }
+      [contentRef.current, glowRef.current],
+      { opacity: 0, duration: 0.5, ease: 'power3.inOut' }
     )
 
-    // Single seamless background slides up like a curtain
+    // The preferred horizontal "door" parting animation
     tl.to(
-      bgRef.current,
-      { y: '-100%', duration: 0.8, ease: 'power4.inOut' },
-      '-=0.2'
+      panelLeftRef.current,
+      { x: '-100%', duration: 0.8, ease: 'power4.inOut' },
+      '+=0.1'
+    )
+    tl.to(
+      panelRightRef.current,
+      { x: '100%', duration: 0.8, ease: 'power4.inOut' },
+      '<'
     )
 
     return () => {
@@ -68,16 +75,27 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
       id="loading-screen"
       ref={containerRef}
       style={{ opacity: 1 }}
-      className="fixed inset-0 z-[9998] flex overflow-hidden bg-white"
+      className="fixed inset-0 z-[9998] flex overflow-hidden"
     >
-      {/* Single seamless background (fixes WebGL alpha transmission boundaries) */}
+      {/* 
+        Solid seamless colors fix WebGL alpha transmission boundaries.
+        Width is 50.5% to ensure zero 1px gap forms during browser rendering sub-pixel calculations.
+      */}
       <div
-        ref={bgRef}
-        className="absolute inset-0 w-full h-full z-10"
-        style={{ 
-          background: 'linear-gradient(165deg, #06160F 0%, #030A07 50%, #06160F 100%)',
-          boxShadow: 'inset 0 0 100px rgba(16, 185, 129, 0.05)'
-        }}
+        ref={panelLeftRef}
+        className="absolute inset-0 w-[50.5%] left-0 z-10"
+        style={{ backgroundColor: '#06160F' }}
+      />
+      <div
+        ref={panelRightRef}
+        className="absolute inset-0 w-[50.5%] right-0 left-[49.5%] z-10"
+        style={{ backgroundColor: '#06160F' }}
+      />
+
+      {/* Shared Glow centered over the seams to create depth without grid lines */}
+      <div 
+        ref={glowRef}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none z-10" 
       />
 
       {/* Center content */}
@@ -85,9 +103,6 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
         ref={contentRef}
         className="relative z-20 flex flex-col items-center justify-center w-full min-h-screen pb-10"
       >
-        {/* Deep background glow matching the emerald */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none" />
-
         <div
           ref={brandRef}
           className="flex flex-col items-center justify-center gap-6"
