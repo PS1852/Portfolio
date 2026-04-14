@@ -1,9 +1,7 @@
 import { useMemo } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Float, MeshTransmissionMaterial } from '@react-three/drei'
+import { Float, MeshTransmissionMaterial, Environment, OrbitControls } from '@react-three/drei'
 import * as THREE from 'three'
-
-import { Environment } from '@react-three/drei'
 
 export function LogoGemPrimitive({ scale = 1 }: { scale?: number }) {
   const geometry = useMemo(() => {
@@ -20,37 +18,54 @@ export function LogoGemPrimitive({ scale = 1 }: { scale?: number }) {
   }, [])
 
   return (
-    <mesh rotation={[Math.PI / 6, Math.PI / 4, 0]} scale={scale}>
-      <primitive object={geometry} attach="geometry" />
-      <meshPhysicalMaterial 
-        color="#10b981" 
-        emissive="#065f46"
-        emissiveIntensity={0.2}
-        metalness={0.9}
-        roughness={0.05}
-        transmission={0.5}
-        thickness={2}
-        ior={2.4}
-        reflectivity={1}
-        iridescence={0.3}
-      />
-    </mesh>
+    <group rotation={[1.0, -0.5, 0.3]} scale={scale}>
+      <mesh>
+        <primitive object={geometry} attach="geometry" />
+        <MeshTransmissionMaterial 
+          backside
+          color="#10b981"
+          transmission={0.96} 
+          thickness={1.5} 
+          roughness={0.05}
+          ior={2.4} 
+          chromaticAberration={0.08}
+          anisotropy={0.5}
+          distortion={0}
+          distortionScale={0}
+          temporalDistortion={0}
+          attenuationDistance={1.2}
+          attenuationColor="#047857"
+        />
+      </mesh>
+      {/* Inner glow piece for added depth */}
+      <mesh scale={0.8}>
+        <primitive object={geometry} attach="geometry" />
+        <meshPhongMaterial color="#059669" transparent opacity={0.6} shininess={100} />
+      </mesh>
+    </group>
   )
 }
 
 export function Logo3D({ size = 50 }: { size?: number }) {
   return (
-    <div style={{ width: size, height: size }}>
-      <Canvas camera={{ position: [0, 0, 4], fov: 40 }} gl={{ antialias: true, alpha: true }}>
-        <ambientLight intensity={1} />
-        <pointLight position={[5, 5, 5]} intensity={1.5} color="#ffffff" />
-        <Float speed={3} rotationIntensity={1.5} floatIntensity={0.5}>
+    <div style={{ width: size, height: size }} className="cursor-grab active:cursor-grabbing pointer-events-auto">
+      <Canvas camera={{ position: [0, 0, 4.2], fov: 42 }} gl={{ antialias: true, alpha: true }}>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[10, 10, 10]} penumbra={1} intensity={1.5} color="#059669" />
+        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#047857" />
+        
+        <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
           <LogoGemPrimitive scale={1.2} />
         </Float>
-        <Environment preset="city" />
+
+        <Environment preset="studio" />
+        <OrbitControls 
+          enableZoom={false} 
+          enablePan={false}
+          autoRotate={true}
+          autoRotateSpeed={3}
+        />
       </Canvas>
     </div>
   )
 }
-
-
