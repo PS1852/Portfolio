@@ -1,4 +1,5 @@
 import { Instagram, Github, Mail, ArrowUpRight } from 'lucide-react'
+import { Logo3D } from './shared/Logo3D'
 
 const NAV_LINKS = [
   { label: 'About', href: '#about' },
@@ -29,16 +30,12 @@ export default function Footer() {
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           {/* Brand */}
           <div className="col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 relative">
-                <img 
-                  src="./images/logo.png" 
-                  alt="Logo" 
-                  className="w-full h-full object-contain filter brightness-110 saturate-110"
-                />
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-14 h-14 -ml-4">
+                <Logo3D size={56} />
               </div>
               <span
-                className="text-xl font-bold text-white tracking-tight"
+                className="text-2xl font-bold text-white tracking-tighter"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 PRANJAL <span className="text-emerald-500 font-medium">STUDIO</span>
