@@ -205,13 +205,12 @@ export default function HeroSection() {
             <h1 className="heading-xl text-ink">
               Crafting{' '}
               <em
-                className="block md:inline-block gradient-text mt-2 md:mt-0 not-italic"
+                className="block gradient-text mt-2 md:mt-0 not-italic"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
                 Visionary
               </em>
-              <br className="hidden md:block" />
-              {' '}Interfaces
+              Interfaces
             </h1>
           </div>
 
