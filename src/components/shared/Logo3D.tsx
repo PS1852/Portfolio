@@ -37,8 +37,9 @@ export function Logo3D({ size = 50 }: { size?: number }) {
   return (
     <div style={{ width: size, height: size }}>
       <Canvas camera={{ position: [0, 0, 4], fov: 40 }} gl={{ antialias: true, alpha: true }}>
-        <ambientLight intensity={1} />
-        <pointLight position={[10, 10, 10]} intensity={1.5} color="#10b981" />
+        <ambientLight intensity={2} />
+        <spotLight position={[5, 5, 5]} intensity={5} color="#10b981" />
+        <pointLight position={[-5, -5, -5]} intensity={2} color="#34d399" />
         <Float speed={3} rotationIntensity={1.5} floatIntensity={0.5}>
           <LogoGemPrimitive scale={1} />
         </Float>
@@ -46,3 +47,4 @@ export function Logo3D({ size = 50 }: { size?: number }) {
     </div>
   )
 }
+
