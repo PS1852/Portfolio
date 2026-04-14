@@ -19,10 +19,10 @@ function GemGeometry() {
       new THREE.Vector2(0.7, 0.5),
       new THREE.Vector2(0, 0.5)
     ]
-    let geo = new THREE.LatheGeometry(points, 8)
-    geo = geo.toNonIndexed() // ensures sharp facets
-    geo.computeVertexNormals()
-    return geo
+    const baseGeo = new THREE.LatheGeometry(points, 8)
+    const facetedGeo = baseGeo.toNonIndexed()
+    facetedGeo.computeVertexNormals()
+    return facetedGeo
   }, [])
   return <primitive object={geometry} attach="geometry" />
 }
