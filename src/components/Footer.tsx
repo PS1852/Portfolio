@@ -30,14 +30,18 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white font-bold font-serif text-lg">
-                P
+              <div className="w-10 h-10 relative">
+                <img 
+                  src="./images/logo.png" 
+                  alt="Logo" 
+                  className="w-full h-full object-contain filter brightness-110 saturate-110"
+                />
               </div>
               <span
-                className="text-xl font-bold text-white"
+                className="text-xl font-bold text-white tracking-tight"
                 style={{ fontFamily: 'Playfair Display, serif' }}
               >
-                PWS
+                PRANJAL <span className="text-emerald-500 font-medium">STUDIO</span>
               </span>
             </div>
             <p className="text-emerald-300/60 text-sm leading-relaxed max-w-xs mb-6">

@@ -51,15 +51,24 @@ export default function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center gap-3 group"
           >
-            <div className="w-9 h-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white font-bold text-sm font-serif transition-transform group-hover:scale-110 duration-300">
-              P
+            <div className="w-12 h-12 relative transition-transform group-hover:scale-110 duration-500">
+              <img 
+                src="./images/logo.png" 
+                alt="Pranjal Web Studio Logo" 
+                className="w-full h-full object-contain filter drop-shadow-md"
+              />
             </div>
-            <span
-              className="font-display font-bold text-xl text-ink"
-              style={{ fontFamily: 'Playfair Display, serif' }}
-            >
-              PWS
-            </span>
+            <div className="flex flex-col items-start leading-none mt-1">
+              <span
+                className="font-display font-extrabold text-xl text-ink tracking-tight"
+                style={{ fontFamily: 'Playfair Display, serif' }}
+              >
+                PRANJAL
+              </span>
+              <span className="text-[10px] font-mono tracking-[0.3em] text-emerald-600 uppercase mt-0.5">
+                Web Studio
+              </span>
+            </div>
           </button>
 
           {/* Desktop Nav */}
